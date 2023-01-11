@@ -13,6 +13,11 @@ testing_extras = [
     'pytest==5.4.2',
 ]
 
+docs_extras = [
+    'sphinx >= 3.0.0',  # Force RTD to use >= 3.0.0
+    'sphinx-rtd-theme >= 1.1.1'
+]
+
 setup(
     name='correctipy',
     packages=find_packages(),
@@ -33,5 +38,5 @@ setup(
         "Topic :: Scientific/Engineering :: Information Analysis",
     ],
     install_requires=install_requires,
-    extras_require={'testing': testing_extras}
+    extras_require={'testing': testing_extras, 'docs': docs_extras}
 )
