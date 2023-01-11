@@ -5,11 +5,13 @@ correlated samples
 
 ## Installation
 
-You can install the stable version of `correctipy` from PyPI using:
+You can install the stable version of `correctipy` from GitHub using:
 
 ``` python
-pip install correctipy
+ pip install git+https://github.com/hendersontrent/correctipy
 ```
+
+*Coming to PyPI soon!*
 
 ## General purpose
 
