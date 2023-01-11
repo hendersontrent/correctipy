@@ -21,15 +21,15 @@ def resampled_ttest(x, y, n=None, n1=None, n2=None):
     if len(x) != len(y):
         raise ValueError("x and y are not the same length.")
 
-    if not all(np.isreal(i) for i in (x,y)):
+    if not all(np.isreal(x)) or not all(np.isreal(y)):
         raise ValueError("x and y should be numeric vectors of the same length.")
-
-    if not all(np.isscalar(i) for i in (n, n1, n2)):
-        raise ValueError("n, n1, and n2 should all be scalars.")
 
     if n is None:
         n = len(x)
         print("n argument missing. Using length(x) as default.")
+
+    if not all(np.isscalar(i) for i in (n, n1, n2)):
+        raise ValueError("n, n1, and n2 should all be scalars.")
 
     # Calculations
     d = x - y  # Calculate differences
@@ -40,7 +40,7 @@ def resampled_ttest(x, y, n=None, n1=None, n2=None):
     else:
         p_value = stats.t.sf(statistic, n-1) # p-value for right tail
 
-    stat_df = pd.DataFrame({"statistic": statistic, "p_value": p_value})
+    stat_df = pd.DataFrame({"statistic": [statistic], "p_value": [p_value]})
     return stat_df
 
 
@@ -77,7 +77,7 @@ def kfold_ttest(x, y, n, k):
     else:
         p_value = stats.t.sf(statistic, n-1) # p-value for right tail
 
-    stat_df = pd.DataFrame({"statistic": statistic, "p_value": p_value})
+    stat_df = pd.DataFrame({"statistic": [statistic], "p_value": [p_value]})
     return stat_df
 
 
@@ -123,12 +123,12 @@ def repkfold_ttest(data, n1, n2, k, r):
             model_values = x.groupby(by='model').agg({'values': 'mean'})
             d.append(model_values.values[0,0] - model_values.values[1,0])
 
-    statistic = np.mean(d) / (np.sqrt(stats.var(d, ddof=1) * ((1/(k * r)) + (n2/n1)))) # Calculate t-statistic
+    statistic = np.mean(d) / (np.sqrt(np.sqrt(np.var(d, ddof=1, keepdims=True)) * ((1/(k * r)) + (n2/n1)))) # Calculate t-statistic
 
     if statistic < 0:
         p_value = stats.t.cdf(statistic, (k * r) - 1) # p-value for left tail
     else:
         p_value = stats.t.sf(statistic, (k * r) - 1) # p-value for right tail
 
-    stat_df = pd.DataFrame({'statistic': statistic, 'p_value': p_value})
+    stat_df = pd.DataFrame({"statistic": [statistic], "p_value": [p_value]})
     return stat_df

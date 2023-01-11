@@ -94,10 +94,9 @@ y = np.random.normal(0.4, 0.1, 30)
 
 tmp = pd.DataFrame({'model':np.repeat([1, 2], 60), 
                    'values':np.concatenate((np.random.normal(0.6, 0.1, 60), np.random.normal(0.4, 0.1, 60))),
-                   'k':np.repeat([1, 1, 2, 2], 15),
-                   'r':np.repeat(np.array([1, 2]), 30)
+                   'k':[1, 1, 2, 2]*30,
+                   'r':[1, 2]*60
                   })
-
 ```
 
 ## Package functionality
@@ -117,5 +116,6 @@ rkcv = repkfold_ttest(tmp, 80, 20, 2, 2) # Repeated k-fold cross-validation
 All the functions return a Pandas dataframe with two named columns: `"statistic"` (the $t$-statistic) and `"p_value"` (the associated $p$-value), meaning they can be easily integrated into complex machine pipelines. Here is an example for the `resampled_ttest` case:
 
 ```
-
+   statistic       p_value
+0    6.09829  6.083703e-07
 ```
