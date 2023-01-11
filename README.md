@@ -44,11 +44,11 @@ If you are interested in the version for R, please see [`correctR`](https://gith
 * $k$-fold cross-validation
 * Repeated $k$-fold cross-validation
 
-These corrections were all originally proposed by [Nadeau and Bengio (2003)](xx) with additional representations in [Bouckaert and Frank (2004)](xx).
+These corrections were all originally proposed by [Nadeau and Bengio (2003)](https://link.springer.com/article/10.1023/A:1024068626366) with additional representations in [Bouckaert and Frank (2004)](https://link.springer.com/chapter/10.1007/978-3-540-24775-3_3).
 
 ### Random subsampling correction
 
-In random subsampling, the standard $t$-test inflates Type I error when used in conjunction with random subsampling due to an underestimation of the variance, as found by Dietterich (1998)^[Dietterich, T. G. (1998). Approximate Statistical Tests for Comparing Supervised Classification Learning Algorithms. Neural Computation, 10(7)]. Nadeau and Bengio (2003) proposed a solution (which we implement as `resampled_ttest` in `correctipy`) in the form of:
+In random subsampling, the standard $t$-test inflates Type I error when used in conjunction with random subsampling due to an underestimation of the variance, as found by [Dietterich (1998)](https://pubmed.ncbi.nlm.nih.gov/9744903/). Nadeau and Bengio (2003) proposed a solution (which we implement as `resampled_ttest` in `correctipy`) in the form of:
 
 $$
 t = \frac{\frac{1}{n} \sum_{j=1}^{n}x_{j}}{\sqrt{(\frac{1}{n} + \frac{n_{2}}{n_{1}})\sigma^{2}}}
@@ -58,7 +58,7 @@ where $n$ is the number of resamples (NOTE: $n$ is *not* sample size), $n_{1}$ i
 
 ### k-fold cross-validation correction
 
-There is an alternate formulation of the random subsampling correction, devised in terms of the unbiased estimator $\rho$, discussed in [Corani et al. (2016)](xx) which we implement as `kfold_tttest` in `correctipy`:
+There is an alternate formulation of the random subsampling correction, devised in terms of the unbiased estimator $\rho$, discussed in [Corani et al. (2016)](https://link.springer.com/article/10.1007/s10994-017-5641-9) which we implement as `kfold_tttest` in `correctipy`:
 
 $$
 t = \frac{\frac{1}{n} \sum_{j=1}^{n}x_{j}}{\sqrt{(\frac{1}{n} + \frac{\rho}{1-\rho})\sigma^{2}}}
