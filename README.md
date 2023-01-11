@@ -105,11 +105,17 @@ tmp = pd.DataFrame({'model':np.repeat([1, 2], 60),
 We can fit all the corrections in one-line functions:
 
 ```python
-import correctipy 
+from correctipy import resampled_ttest
+from correctipy import kfold_ttest
+from correctipy import repkfold_ttest
 
 rss = resampled_ttest(x, y, 30, 80, 20) # Random subsampling
 kcv = kfold_ttest(x, y, 100, 30) # k-fold cross-validation
 rkcv = repkfold_ttest(tmp, 80, 20, 2, 2) # Repeated k-fold cross-validation
 ```
 
-All the functions return a Pandas dataframe with two named columns: `"statistic"` (the $t$-statistic) and `"p_value"` (the associated $p$-value), meaning they can be easily integrated into complex machine pipelines.
+All the functions return a Pandas dataframe with two named columns: `"statistic"` (the $t$-statistic) and `"p_value"` (the associated $p$-value), meaning they can be easily integrated into complex machine pipelines. Here is an example for the `resampled_ttest` case:
+
+```
+
+```
