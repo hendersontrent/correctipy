@@ -4,7 +4,7 @@ import scipy.stats as stats
 
 def resampled_ttest(x, y, n=None, n1=None, n2=None):
 
-     """
+    """
     Compute correlated t-statistic and p-value for resampled data.
     Args:
         x (array): vector of values for model A
@@ -82,6 +82,19 @@ def kfold_ttest(x, y, n, k):
 
 
 def repkfold_ttest(data, n1, n2, k, r):
+
+    """
+    Compute correlated t-statistic and p-value for repeated k-fold cross-validated results.
+    Args:
+        data (dataframe): dataframe of values for model A and model B over repeated k-fold cross-validation
+        n1 (array): train set size
+        n2 (array): test set size
+        k (array): number of folds used in k-fold
+        r (array): number of repeats per fold
+
+    Returns:
+        dataframe: Pandas dataframe containing the test statistic and the p-value.
+    """
     
     # Arg checks
     if 'model' not in data.columns:
@@ -102,7 +115,7 @@ def repkfold_ttest(data, n1, n2, k, r):
     if len(data['model'].unique()) != 2:
         raise ValueError("Column 'model' in data should only have two unique labels (one for each model to compare).")
 
-     d = []
+    d = []
 
     for i in range(1, k+1):
         for j in range(1, r+1):
