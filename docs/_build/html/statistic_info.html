@@ -13,7 +13,6 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -101,23 +100,23 @@ Currently, only cases where two models are to be compared are supported.</p>
 <div class="section" id="random-subsampling-correction">
 <h2>Random subsampling correction<a class="headerlink" href="#random-subsampling-correction" title="Permalink to this headline">¶</a></h2>
 <p>In random subsampling, the standard t-test inflates Type I error when used in conjunction with random subsampling due to an underestimation of the variance, as found by Dietterich (1998). Nadeau and Bengio (2003) proposed a solution (which we implement as <code class="xref py py-func docutils literal notranslate"><span class="pre">correctipy.resampled_ttest()</span></code> in correctipy) in the form of:</p>
-<div class="math notranslate nohighlight">
-\[t = \frac{\frac{1}{n} \sum_{j=1}^{n}x_{j}}{\sqrt{(\frac{1}{n} + \frac{n_{2}}{n_{1}})\sigma^{2}}}\]</div>
-<p>where <span class="math notranslate nohighlight">\(n\)</span> is the number of resamples (NOTE: <span class="math notranslate nohighlight">\(n\)</span> is not sample size), <span class="math notranslate nohighlight">\(n_{1}\)</span> is the number of samples in the training data, and <span class="math notranslate nohighlight">\(n_{2}\)</span> is the number of samples in the test data. <span class="math notranslate nohighlight">\(\\sigma^{2}\)</span> is the variance estimate used in the standard paired t-test (which simply has <span class="math notranslate nohighlight">\(\\frac{\\sigma}{\\sqrt{n}}\)</span> in the denominator where <span class="math notranslate nohighlight">\(n\)</span> is the sample size in this case).</p>
+<div class="math">
+<p><img src="_images/math/3f9843004e71fb3dd0ca32f73bf9ff730f9c9251.png" alt="t = \frac{\frac{1}{n} \sum_{j=1}^{n}x_{j}}{\sqrt{(\frac{1}{n} + \frac{n_{2}}{n_{1}})\sigma^{2}}}"/></p>
+</div><p>where <img class="math" src="_images/math/5a939c5280da7202ca4531f175a7780ad5e1f80a.png" alt="n"/> is the number of resamples (NOTE: <img class="math" src="_images/math/5a939c5280da7202ca4531f175a7780ad5e1f80a.png" alt="n"/> is not sample size), <img class="math" src="_images/math/8bb5e43e4f2d1ac591f8e5596c6bb2ca2c37497a.png" alt="n_{1}"/> is the number of samples in the training data, and <img class="math" src="_images/math/defbf11879b76e80e2ce5fb9e6abb06c5344571a.png" alt="n_{2}"/> is the number of samples in the test data. <img class="math" src="_images/math/b1434aee17fa9d74dc28489026c2d443b535d65a.png" alt="\\sigma^{2}"/> is the variance estimate used in the standard paired t-test (which simply has <img class="math" src="_images/math/2e6330a742c47a2466e5d3797dbbd19fceb366fe.png" alt="\\frac{\\sigma}{\\sqrt{n}}"/> in the denominator where <img class="math" src="_images/math/5a939c5280da7202ca4531f175a7780ad5e1f80a.png" alt="n"/> is the sample size in this case).</p>
 </div>
 <div class="section" id="k-fold-cross-validation-correction">
 <h2>k-fold cross-validation correction<a class="headerlink" href="#k-fold-cross-validation-correction" title="Permalink to this headline">¶</a></h2>
-<p>There is an alternate formulation of the random subsampling correction, devised in terms of the unbiased estimator <span class="math notranslate nohighlight">\(\\rho\)</span>, discussed in <a class="reference external" href="https://link.springer.com/article/10.1007/s10994-017-5641-9">Corani et al. (2016)</a> which we implement as <code class="xref py py-func docutils literal notranslate"><span class="pre">correctipy.kfold_tttest()</span></code> in correctipy:</p>
-<div class="math notranslate nohighlight">
-\[t = \frac{\frac{1}{n} \sum_{j=1}^{n}x_{j}}{\sqrt{(\frac{1}{n} + \frac{\rho}{1-\rho})\sigma^{2}}}\]</div>
-<p>where <span class="math notranslate nohighlight">\(n\)</span> is the number of resamples and <span class="math notranslate nohighlight">\(\\rho = \\frac{1}{k}\)</span> where <span class="math notranslate nohighlight">\(k\)</span> is the number of folds in the k-fold cross-validation procedure. This formulation stems from the fact that Nadeau and Bengio (2003) proved there is no unbiased estimator, but it can be approximated with <span class="math notranslate nohighlight">\(\\rho = \\frac{1}{k}\)</span>.</p>
+<p>There is an alternate formulation of the random subsampling correction, devised in terms of the unbiased estimator <img class="math" src="_images/math/392a2e0fe684aaaaca1e130c1bf840693a2ec54e.png" alt="\\rho"/>, discussed in <a class="reference external" href="https://link.springer.com/article/10.1007/s10994-017-5641-9">Corani et al. (2016)</a> which we implement as <code class="xref py py-func docutils literal notranslate"><span class="pre">correctipy.kfold_tttest()</span></code> in correctipy:</p>
+<div class="math">
+<p><img src="_images/math/732dc35ec391fcd1068ab0de99db406fb05f72b4.png" alt="t = \frac{\frac{1}{n} \sum_{j=1}^{n}x_{j}}{\sqrt{(\frac{1}{n} + \frac{\rho}{1-\rho})\sigma^{2}}}"/></p>
+</div><p>where <img class="math" src="_images/math/5a939c5280da7202ca4531f175a7780ad5e1f80a.png" alt="n"/> is the number of resamples and <img class="math" src="_images/math/3370a607468c874b49cfac55d3f8a451ab235d2a.png" alt="\\rho = \\frac{1}{k}"/> where <img class="math" src="_images/math/9630132210b904754c9ab272b61cb527d12263ca.png" alt="k"/> is the number of folds in the k-fold cross-validation procedure. This formulation stems from the fact that Nadeau and Bengio (2003) proved there is no unbiased estimator, but it can be approximated with <img class="math" src="_images/math/3370a607468c874b49cfac55d3f8a451ab235d2a.png" alt="\\rho = \\frac{1}{k}"/>.</p>
 </div>
 <div class="section" id="repeated-k-fold-cross-validation-correction">
 <h2>Repeated k-fold cross-validation correction<a class="headerlink" href="#repeated-k-fold-cross-validation-correction" title="Permalink to this headline">¶</a></h2>
 <p>Repeated k-fold cross-validation is more complex than the previous case(s) as we now have r repeats for every fold k. Bouckaert and Frank (2004) present a nice representation of the corrected test for this case which we implement as <code class="xref py py-func docutils literal notranslate"><span class="pre">correctipy.repkfold_ttest()</span></code> in correctipy:</p>
-<div class="math notranslate nohighlight">
-\[t = \frac{\frac{1}{k \cdot r} \sum_{i=1}^{k} \sum_{j=1}^{r} x_{ij}}{\sqrt{(\frac{1}{k \cdot r} + \frac{n_{2}}{n_{1}})\sigma^{2}}}\]</div>
-</div>
+<div class="math">
+<p><img src="_images/math/8612496ec3ecc1c931a46d3ae7a2404ec34b52aa.png" alt="t = \frac{\frac{1}{k \cdot r} \sum_{i=1}^{k} \sum_{j=1}^{r} x_{ij}}{\sqrt{(\frac{1}{k \cdot r} + \frac{n_{2}}{n_{1}})\sigma^{2}}}"/></p>
+</div></div>
 </div>
 
 
