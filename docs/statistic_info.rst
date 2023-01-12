@@ -1,4 +1,4 @@
-Mathematics of the test statistics
+Test statistic mathematics
 ==========
 
 Often in machine learning, we want to compare the performance of
