@@ -11,8 +11,6 @@ You can install the stable version of `correctipy` from GitHub using:
  pip install git+https://github.com/hendersontrent/correctipy
 ```
 
-*Coming to PyPI soon!*
-
 ## General purpose
 
 Often in machine learning, we want to compare the performance of
