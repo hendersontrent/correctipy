@@ -10,7 +10,8 @@ Welcome to correctipy's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+   quickstart
+   statistic_info
 
 Indices and tables
 ==================
