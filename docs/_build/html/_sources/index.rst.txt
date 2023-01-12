@@ -3,8 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+
 Welcome to correctipy's documentation!
 ======================================
+
+correctipy is a python package for calculating corrected test statistics for comparing machine learning models on correlated samples. This set of documentation contains code examples and mathematical details on the test statistics that have been implemented.
+
+Contents
+========
 
 .. toctree::
    :maxdepth: 2
@@ -12,10 +18,3 @@ Welcome to correctipy's documentation!
 
    quickstart
    statistic_info
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
