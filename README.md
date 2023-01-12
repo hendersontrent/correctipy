@@ -52,9 +52,9 @@ These corrections were all originally proposed by [Nadeau and Bengio (2003)](htt
 
 In random subsampling, the standard $t$-test inflates Type I error when used in conjunction with random subsampling due to an underestimation of the variance, as found by [Dietterich (1998)](https://pubmed.ncbi.nlm.nih.gov/9744903/). Nadeau and Bengio (2003) proposed a solution (which we implement as `resampled_ttest` in `correctipy`) in the form of:
 
-$$
-t = \frac{\frac{1}{n} \sum_{j=1}^{n}x_{j}}{\sqrt{(\frac{1}{n} + \frac{n_{2}}{n_{1}})\sigma^{2}}}
-$$
+<p align="center">
+  <img src="docs/images/rss.svg" alt="Equation for random subsampling corrected test statistic"/>
+</p>
 
 where $n$ is the number of resamples (NOTE: $n$ is *not* sample size), $n_{1}$ is the number of samples in the training data, and $n_{2}$ is the number of samples in the test data. $\sigma^{2}$ is the variance estimate used in the standard paired $t$-test (which simply has $\frac{\sigma}{\sqrt{n}}$ in the denominator where $n$ is the sample size in this case).
 
@@ -62,9 +62,9 @@ where $n$ is the number of resamples (NOTE: $n$ is *not* sample size), $n_{1}$ i
 
 There is an alternate formulation of the random subsampling correction, devised in terms of the unbiased estimator $\rho$, discussed in [Corani et al. (2016)](https://link.springer.com/article/10.1007/s10994-017-5641-9) which we implement as `kfold_tttest` in `correctipy`:
 
-$$
-t = \frac{\frac{1}{n} \sum_{j=1}^{n}x_{j}}{\sqrt{(\frac{1}{n} + \frac{\rho}{1-\rho})\sigma^{2}}}
-$$
+<p align="center">
+  <img src="docs/images/kcv.svg" alt="Equation for k-fold cross-validation corrected test statistic"/>
+</p>
 
 where $n$ is the number of resamples and $\rho = \frac{1}{k}$ where $k$ is the number of folds in the $k$-fold cross-validation procedure. This formulation stems from the fact that Nadeau and Bengio (2003) proved there is no unbiased estimator, but it can be approximated with $\rho = \frac{1}{k}$.
 
@@ -72,9 +72,9 @@ where $n$ is the number of resamples and $\rho = \frac{1}{k}$ where $k$ is the n
 
 Repeated $k$-fold cross-validation is more complex than the previous case(s) as we now have $r$ repeats for every fold $k$. Bouckaert and Frank (2004) present a nice representation of the corrected test for this case which we implement as `repkfold_ttest` in `correctipy`:
 
-$$
-t = \frac{\frac{1}{k \cdot r} \sum_{i=1}^{k} \sum_{j=1}^{r} x_{ij}}{\sqrt{(\frac{1}{k \cdot r} + \frac{n_{2}}{n_{1}})\sigma^{2}}}
-$$
+<p align="center">
+  <img src="docs/images/rkcv.svg" alt="Equation for k-fold cross-validation corrected test statistic"/>
+</p>
 
 ## Setup
 
