@@ -49,7 +49,7 @@ templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # MathJax path
-mathjax_path = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
+mathjax_path = 'MathJax.js?config=TeX-AMS_HTML'
 
 
 # -- Options for HTML output -------------------------------------------------
