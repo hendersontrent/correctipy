@@ -102,21 +102,21 @@ Currently, only cases where two models are to be compared are supported.</p>
 <h2>Random subsampling correction<a class="headerlink" href="#random-subsampling-correction" title="Permalink to this headline">¶</a></h2>
 <p>In random subsampling, the standard t-test inflates Type I error when used in conjunction with random subsampling due to an underestimation of the variance, as found by Dietterich (1998). Nadeau and Bengio (2003) proposed a solution (which we implement as <code class="xref py py-func docutils literal notranslate"><span class="pre">correctipy.resampled_ttest()</span></code> in correctipy) in the form of:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}t = \\frac{\\frac{1}{n} \\sum_{j=1}^{n}x_{j}}{\\sqrt{(\\frac{1}{n} + \\frac{n_{2}}{n_{1}})\\sigma^{2}}}\end{split}\]</div>
+\[t = \frac{\frac{1}{n} \sum_{j=1}^{n}x_{j}}{\sqrt{(\frac{1}{n} + \frac{n_{2}}{n_{1}})\sigma^{2}}}\]</div>
 <p>where <span class="math notranslate nohighlight">\(n\)</span> is the number of resamples (NOTE: <span class="math notranslate nohighlight">\(n\)</span> is not sample size), <span class="math notranslate nohighlight">\(n_{1}\)</span> is the number of samples in the training data, and <span class="math notranslate nohighlight">\(n_{2}\)</span> is the number of samples in the test data. <span class="math notranslate nohighlight">\(\\sigma^{2}\)</span> is the variance estimate used in the standard paired t-test (which simply has <span class="math notranslate nohighlight">\(\\frac{\\sigma}{\\sqrt{n}}\)</span> in the denominator where <span class="math notranslate nohighlight">\(n\)</span> is the sample size in this case).</p>
 </div>
 <div class="section" id="k-fold-cross-validation-correction">
 <h2>k-fold cross-validation correction<a class="headerlink" href="#k-fold-cross-validation-correction" title="Permalink to this headline">¶</a></h2>
 <p>There is an alternate formulation of the random subsampling correction, devised in terms of the unbiased estimator <span class="math notranslate nohighlight">\(\\rho\)</span>, discussed in <a class="reference external" href="https://link.springer.com/article/10.1007/s10994-017-5641-9">Corani et al. (2016)</a> which we implement as <code class="xref py py-func docutils literal notranslate"><span class="pre">correctipy.kfold_tttest()</span></code> in correctipy:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}t = \\frac{\\frac{1}{n} \\sum_{j=1}^{n}x_{j}}{\\sqrt{(\\frac{1}{n} + \\frac{\\rho}{1-\\rho})\\sigma^{2}}}\end{split}\]</div>
+\[t = \frac{\frac{1}{n} \sum_{j=1}^{n}x_{j}}{\sqrt{(\frac{1}{n} + \frac{\rho}{1-\rho})\sigma^{2}}}\]</div>
 <p>where <span class="math notranslate nohighlight">\(n\)</span> is the number of resamples and <span class="math notranslate nohighlight">\(\\rho = \\frac{1}{k}\)</span> where <span class="math notranslate nohighlight">\(k\)</span> is the number of folds in the k-fold cross-validation procedure. This formulation stems from the fact that Nadeau and Bengio (2003) proved there is no unbiased estimator, but it can be approximated with <span class="math notranslate nohighlight">\(\\rho = \\frac{1}{k}\)</span>.</p>
 </div>
 <div class="section" id="repeated-k-fold-cross-validation-correction">
 <h2>Repeated k-fold cross-validation correction<a class="headerlink" href="#repeated-k-fold-cross-validation-correction" title="Permalink to this headline">¶</a></h2>
 <p>Repeated k-fold cross-validation is more complex than the previous case(s) as we now have r repeats for every fold k. Bouckaert and Frank (2004) present a nice representation of the corrected test for this case which we implement as <code class="xref py py-func docutils literal notranslate"><span class="pre">correctipy.repkfold_ttest()</span></code> in correctipy:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}t = \\frac{\\frac{1}{k \\cdot r} \\sum_{i=1}^{k} \\sum_{j=1}^{r} x_{ij}}{\\sqrt{(\\frac{1}{k \\cdot r} + \\frac{n_{2}}{n_{1}})\\sigma^{2}}}\end{split}\]</div>
+\[t = \frac{\frac{1}{k \cdot r} \sum_{i=1}^{k} \sum_{j=1}^{r} x_{ij}}{\sqrt{(\frac{1}{k \cdot r} + \frac{n_{2}}{n_{1}})\sigma^{2}}}\]</div>
 </div>
 </div>
 

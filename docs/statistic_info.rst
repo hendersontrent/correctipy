@@ -36,7 +36,7 @@ In random subsampling, the standard t-test inflates Type I error when used in co
 
 .. math::
 
-    t = \\frac{\\frac{1}{n} \\sum_{j=1}^{n}x_{j}}{\\sqrt{(\\frac{1}{n} + \\frac{n_{2}}{n_{1}})\\sigma^{2}}}
+    t = \frac{\frac{1}{n} \sum_{j=1}^{n}x_{j}}{\sqrt{(\frac{1}{n} + \frac{n_{2}}{n_{1}})\sigma^{2}}}
 
 where :math:`n` is the number of resamples (NOTE: :math:`n` is not sample size), :math:`n_{1}` is the number of samples in the training data, and :math:`n_{2}` is the number of samples in the test data. :math:`\\sigma^{2}` is the variance estimate used in the standard paired t-test (which simply has :math:`\\frac{\\sigma}{\\sqrt{n}}` in the denominator where :math:`n` is the sample size in this case).
 
@@ -47,7 +47,7 @@ There is an alternate formulation of the random subsampling correction, devised 
 
 .. math::
 
-    t = \\frac{\\frac{1}{n} \\sum_{j=1}^{n}x_{j}}{\\sqrt{(\\frac{1}{n} + \\frac{\\rho}{1-\\rho})\\sigma^{2}}}
+    t = \frac{\frac{1}{n} \sum_{j=1}^{n}x_{j}}{\sqrt{(\frac{1}{n} + \frac{\rho}{1-\rho})\sigma^{2}}}
 
 where :math:`n` is the number of resamples and :math:`\\rho = \\frac{1}{k}` where :math:`k` is the number of folds in the k-fold cross-validation procedure. This formulation stems from the fact that Nadeau and Bengio (2003) proved there is no unbiased estimator, but it can be approximated with :math:`\\rho = \\frac{1}{k}`.
 
@@ -58,4 +58,4 @@ Repeated k-fold cross-validation is more complex than the previous case(s) as we
 
 .. math::
 
-    t = \\frac{\\frac{1}{k \\cdot r} \\sum_{i=1}^{k} \\sum_{j=1}^{r} x_{ij}}{\\sqrt{(\\frac{1}{k \\cdot r} + \\frac{n_{2}}{n_{1}})\\sigma^{2}}}
+    t = \frac{\frac{1}{k \cdot r} \sum_{i=1}^{k} \sum_{j=1}^{r} x_{ij}}{\sqrt{(\frac{1}{k \cdot r} + \frac{n_{2}}{n_{1}})\sigma^{2}}}
