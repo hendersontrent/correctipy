@@ -21,8 +21,8 @@ docs_extras = [
 setup(
     name='correctipy',
     packages=find_packages(),
-    version='0.1.0',
-    description='Network analysis for time series',
+    version='0.2.0',
+    description='Corrected test statistics for comparing machine learning models on correlated samples',
     author='Trent Henderson',
     author_email='then6675@uni.sydney.edu.au',
     url='https://github.com/hendersontrent/correctipy',
