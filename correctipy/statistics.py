@@ -80,7 +80,7 @@ def kfold_ttest(x, y, n, k, tailed="two", greater=None):
     Args:
         x (array): vector of values for model A
         y (array): vector of values for model B
-        n (int): total sample size
+        n (int): number of resamples
         k (int): number of folds used in k-fold
         tailed (str): whether to perform a 'two'-tailed or 'one'-tailed test. Defaults to 'two'
         greater (str): which of 'x' or 'y' is greater for the one-tailed test if tailed='one'. Defaults to None
