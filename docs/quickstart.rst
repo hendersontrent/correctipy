@@ -57,5 +57,15 @@ All the functions return a Pandas dataframe with two named columns: ``"statistic
 
    >>> print(rss)
 
-          statistic       p_value
-     0    6.09829  6.083703e-07
+          statistic   p_value
+     0    2.992216  0.005607
+
+One- and two-tailed tests
+-------------------------
+
+By default, all three functions perform a two-tailed test (``tailed="two"``). To perform a one-tailed test, set ``tailed="one"`` and use ``greater`` to specify which model is hypothesised to be greater. For ``resampled_ttest`` and ``kfold_ttest``, ``greater`` is one of ``"x"`` or ``"y"``; for ``repkfold_ttest``, ``greater`` is one of the labels in the ``"model"`` column:
+
+.. code::
+
+   >>> resampled_ttest(x, y, 30, 80, 20, tailed="one", greater="x")
+   >>> repkfold_ttest(tmp, 80, 20, 2, 2, tailed="one", greater=1)
